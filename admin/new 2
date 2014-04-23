@@ -1,0 +1,13 @@
+VST
+
+sst
+
+FLYING SQUARD
+
+
+ALTER TABLE `ps_details` ADD `vst_name` VARCHAR( 50 ) NOT NULL ,
+ADD `vst_mobile` VARCHAR( 10 ) NOT NULL ,
+ADD `sst_name` VARCHAR( 50 ) NOT NULL ,
+ADD `sst_mobile` VARCHAR( 10 ) NOT NULL ,
+ADD `fs_name` VARCHAR( 50 ) NOT NULL ,
+ADD `fs_mobile` VARCHAR( 10 ) NOT NULL 
