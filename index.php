@@ -160,7 +160,17 @@ var map_type=$('select#map_type').val();
             position: point,
             map: map,
             title:(ps_no + '\n' + ps_name),
-            html:'<div style="height:300px"> <table><tbody><tr><td colspan="2">'+ps_no+'-'+ps_name+'</td></tr><tr><td> BDO OFFICE:</td><td>'+bdo_office+'</td></tr><tr><td> BDO NO:</td><td><a href="tel:'+bdo_no+'">'+bdo_no+'</a></td></tr><tr><td>  SECTOR :</td><td>'+sector_no+'-'+sector_name+'</td></tr><tr><td>SECTOR OFFICER :</td><td>'+sector_officer_name+'</td></tr><tr><td>MOBILE NO :</td><td><a href="tel:'+sector_officer_mobile+'">'+sector_officer_mobile+'</a></td></tr><tr><td> VST:</td><td>'+vst_name+' <a href="tel:'+vst_mobile+'">'+vst_mobile+'</a></td></tr><tr><td> SST:</td><td>'+sst_name+' <a href="tel:'+sst_mobile+'">'+sst_mobile+'</a></td></tr><tr><td> FQ:</td><td>'+fs_name+' <a href="tel:'+fs_mobile+'">'+fs_mobile+'</a></td></tr><tr><td>PRO MOBILE NO :</td><td><a href="tel:0">0</a></td></tr><tr><td>P1 MOBILE NO:</td><td><a href="tel:0">0</a></td></tr><tr><td></td></tr><tr><td colspan="2"><span>'+lweMark+'</span><span>'+mobile_shadow_zone_mark+'</span><span>'+critical_ps_mark+'</span><span>'+vulnerable_mark+'</span></td></tr></tbody></table></div>',
+            html:'<div style="height:300px"> <table><tbody><tr><td colspan="2">'+ps_no+'-'+ps_name
+                    +'</td></tr><tr><td> BDO OFFICE:</td><td>'+bdo_office+'</td></tr><tr><td> BDO NO:</td><td><a href="tel:'
+                    +bdo_no+'">'+bdo_no+'</a></td></tr><tr><td>  SECTOR :</td><td>'+sector_no+'-'+sector_name
+                    +'</td></tr><tr><td>SECTOR OFFICER :</td><td>'+sector_officer_name+'</td></tr><tr><td>MOBILE NO :</td><td><a href="tel:'
+                    +sector_officer_mobile+'">'+sector_officer_mobile+'</a></td></tr><tr><td> VST:</td><td>'+vst_name+' <a href="tel:'
+                    +vst_mobile+'">'+vst_mobile+'</a></td></tr><tr><td> SST:</td><td>'+sst_name+' <a href="tel:'+sst_mobile+'">'
+                    +sst_mobile+'</a></td></tr><tr><td> FQ:</td><td>'+fs_name+' <a href="tel:'+fs_mobile+'">'+fs_mobile
+                    +'</a></td></tr><tr><td>PRO MOBILE NO :</td><td><a href="tel:0">0</a></td></tr><tr><td>P1 MOBILE NO:</td><td>'
+                    +'<a href="tel:0">0</a></td></tr><tr><td></td></tr><tr><td colspan="2"><span>'+lweMark+'</span><span>'
+                    +mobile_shadow_zone_mark+'</span><span>'+critical_ps_mark+'</span><span>'+vulnerable_mark
+                    +'</span></td></tr></tbody></table></div>',
             icon: customIcons[ac_no]
 			
         });
