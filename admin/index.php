@@ -56,10 +56,6 @@ if(!isset($_SESSION['admin_name']))
 </head>
 
 <body>
-	<?php
-
-
-?>
 <div id="wrapper">
 <div id="header-admin">
 	<div class="logo"<a href="./"><img src="../logo.png" alt="Paschim medinipur"></a></div>

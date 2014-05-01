@@ -62,16 +62,10 @@ ul#nav a:hover { background: url("images/bg-maintitle.png") repeat-x scroll left
 .jtable-input-label{width:180px;float:left;text-align:right;padding-right:5px}
 .jtable-input-label:after {   content: ":";}
 
-.open {
-    background: url("../images/menu.png") no-repeat scroll center center #000;
-    border: 0 none;
-    box-shadow: 0 0 3px #000000;
-    
-    float: left;
-    height: 50px;
-    margin-right: 10px;
-    text-indent: -999999px;
-    width: 50px;
+.menu {
+    background: url("../images/menu.png") no-repeat scroll left center;
+	padding-left:20px
+  
 }
 #footer {  background-color: #fff; color: #666;padding: 5px;margin-top:10px;box-shadow:0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset}
 

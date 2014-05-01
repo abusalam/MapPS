@@ -1,4 +1,19 @@
+<script>
 
+function ActionScript(act)
+{
+if($("#con_id").val()=="" && act !="add")
+	  alert("Please select an Employee");
+else
+	{
+		url="pages.php?src=masters/consultant.php&act="+act+"&con_id="+$("#con_id").val();
+		location.href=url;
+		
+	}
+	
+		
+}
+</script>
 <div class="page_head">
 	
 	<table width="100%" class="" cellspacing="0">
@@ -38,6 +53,32 @@
 					deleteAction: '../Controllers/Ps.php?action=delete'
 									
 				},
+							
+toolbar: {
+    items: [{
+        icon: '../images/images.png',
+        text: 'Upload Image',
+       click: function () {
+							 var $selectedRows = $('#AcTable').jtable('selectedRows');
+							 if ($selectedRows.length > 0) 
+									{
+										//Show selected rows
+										$selectedRows.each(function () {
+											var record = $(this).data('record');
+											var src = "upload_img.php?ps_no="+record.ps_no+"&ac_no="+record.ac_no;
+											var title = "UPLOAD POLLING STATION IMAGES";
+											var width = 450;
+											var height = 250;
+											iframe.attr({ width: +width,height: +height, src: src });
+											dialog.dialog("option", "title", title).dialog("open");
+											})
+									}
+									else
+									alert("Please select a PS");
+						}
+                       
+    }]
+},
 				fields: {
 					ps_id: {key: true,	create: false,	edit: false,list: false},
 					ac_no: {	title: 'AC NO', options: { <?php 
@@ -74,14 +115,13 @@
 					
 					
 				},
-			
 
 		 formCreated: function (event, data) {
               
                 
                 data.form.find('input[name="ac_no"]').addClass('validate[required]');
                 data.form.find('input[name="ps_no"]').addClass('validate[required]');
-                data.form.find('input[name="lat"]').addClass('validate[required,custom[number]]');
+                data.form.find('input[name="lat"]').addClass('validate[required]');
                 data.form.find('input[name="lon"]').addClass('validate[required]');
                 data.form.find('input[name="sector_officer_name"]').addClass('validate[required]');
                 data.form.find('input[name="sector_officer_mobile"]').addClass('validate[required]');
@@ -121,3 +161,23 @@
     });
 	</script>
 	<input type="hidden" id="ac_no_select" />
+	
+<script>	
+	
+    var iframe = $('<iframe frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>');
+    var dialog = $("<div></div>").append(iframe).appendTo("body").dialog({
+        autoOpen: false,
+        modal: true,
+        resizable: true,
+        width: "auto",
+        height: "auto",
+		buttons: {
+					"Close": function() {
+						$(this).dialog("close");
+						 location.reload();
+					}
+				},
+		close: function () { iframe.attr("src", "");}
+    });
+   
+	</script>	
