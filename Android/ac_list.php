@@ -2,9 +2,11 @@
 include_once('../mysql_conn.php');
 include_once('../functions/common.php');
 //echo "ssss". $_REQUEST['ac'];
-if(strtoupper(makeSafe(@$_GET['ac']))!="ALL")
+$pc=makeSafe(@$_GET['pc']);
+$pc=is_numeric($pc)?$pc:"";
+if($pc!="")
 {
-   $sql="select distinct ac_no,ac_name from ac where pc_no=".makeSafe($_GET['pc'])." order by ac_no";
+   $sql="select distinct ac_no,ac_name from ac where pc_no=".makeSafe($pc)." order by ac_no";
 $result = mysql_query($sql,$link)    or die("Query  failed! ".mysql_error());
     $recordCount=mysql_affected_rows($link);
     $rows = array();
