@@ -13,7 +13,6 @@ if ($_GET['stype'] == "avg") {
   if ($ac != "")
     $sql .=" and ps_details.ac_no=" . makeSafe($ac);
 
-//echo $sql;
   $result = mysql_query($sql, $link) or die("Query  failed! " . mysql_error());
 
   $rows = array();
