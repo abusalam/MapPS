@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/component.css">
     <script src="js/jquery-1.7.2.min.js"></script>
     <script src="js/modernizr.custom.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAJw9v_Qe8VDp2C4CoU0YIdfqqOLl4TClc&sensor=false"></script>
     <link rel="stylesheet" href="css/lightbox.css" media="screen"/>
     <script src="js/lightbox-2.6.min.js"></script>
     <script>
@@ -19,6 +19,10 @@
       var ac = $('select#ac').val();
       //var sector_no=$('select#sector_no').val();
       //var MAP_TYPE=$('select#map_type').val();
+
+      var map;
+
+      var markers;
 
       function getData() {
         $('#showLeft').click();
@@ -41,6 +45,29 @@
 
         });
 
+        iconInit = new google.maps.MarkerImage('images/init.png');
+        iconInit.image = 'http://labs.google.com/ridefinder/images/mm_20_red.png';
+        iconInit.shadow = 'http://labs.google.com/ridefinder/images/mm_20_shadow.png';
+
+        iconPS = new google.maps.MarkerImage('images/PS.png');
+        iconPS.image = 'http://labs.google.com/ridefinder/images/mm_20_green.png';
+        iconPS.shadow = 'http://labs.google.com/ridefinder/images/mm_20_shadow.png';
+
+        iconPE = new google.maps.MarkerImage('images/PE.png');
+        iconPE.image = 'http://labs.google.com/ridefinder/images/mm_20_yellow.png';
+        iconPE.shadow = 'http://labs.google.com/ridefinder/images/mm_20_shadow.png';
+
+        customIcons = [];
+        customIcons["init"] = iconInit;
+        customIcons["PS"] = iconPS;
+        customIcons["PE"] = iconPE;
+
+        addMarkers();
+        $('#loading').hide();
+      }
+
+      function initialize() {
+        //var map_type=$('select#map_type').val();
         $.ajax({
           url: "Controllers/poll_stat.php?stype=avg&pc=" + $('select#pc').val() + "&ac=" + $('select#ac').val() + "&sector_no=&op_criteria=&ps_no=",
           type: "GET",
@@ -65,38 +92,16 @@
           }
         });
 
-        iconInit = new google.maps.MarkerImage('images/init.png');
-        iconInit.image = 'http://labs.google.com/ridefinder/images/mm_20_red.png';
-        iconInit.shadow = 'http://labs.google.com/ridefinder/images/mm_20_shadow.png';
-
-        iconPS = new google.maps.MarkerImage('images/PS.png');
-        iconPS.image = 'http://labs.google.com/ridefinder/images/mm_20_green.png';
-        iconPS.shadow = 'http://labs.google.com/ridefinder/images/mm_20_shadow.png';
-
-        iconPE = new google.maps.MarkerImage('images/PE.png');
-        iconPE.image = 'http://labs.google.com/ridefinder/images/mm_20_yellow.png';
-        iconPE.shadow = 'http://labs.google.com/ridefinder/images/mm_20_shadow.png';
-
-        customIcons = [];
-        customIcons["init"] = iconInit;
-        customIcons["PS"] = iconPS;
-        customIcons["PE"] = iconPE;
-
-        initialize();
-        $('#loading').hide();
-      }
-
-      function initialize() {
-        //var map_type=$('select#map_type').val();
-
         var mapOptions = {
           center: new google.maps.LatLng($('#latPosition').val(), $('#lonPosition').val()),
           zoom: 9,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        var map = new google.maps.Map(document.getElementById("gmap_canvas"), mapOptions);
+        map = new google.maps.Map(document.getElementById("gmap_canvas"), mapOptions);
+      }
 
+      function addMarkers() {
         //if(map_type=="HYBRID") map.setMapTypeId(google.maps.MapTypeId.HYBRID);
         //if(map_type=="SATELLITE") map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
         //if(map_type=="TERRAIN") map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
@@ -140,7 +145,7 @@
           var critical_ps_mark = (critical_ps == "Yes") ? '<img class="pad" alt="Critical" src="images/critical.png" width="24px">' : '';
           var vulnerable_mark = (vulnerable_ps == "Yes") ? '<img class="pad" alt="Vulnerable" src="images/vulnerable.png" width="24px">' : '';
           var mobile_shadow_zone_mark = (mobile_shadow_zone == "Yes") ? '<img class="pad" alt="mobile_shadow_zone" src="images/mobile_shadow.png" width="24px">' : '';
-          var mobile_shadow_zone = node['mobile_shadow_zone'];
+
           //N=not started
           //S=Poll Started
           //E=Poll ended
@@ -212,25 +217,16 @@
                 $('#Msg').html(msg);
               });
             });
-
-
           });
-
+          markers[i][0] = marker;
         }
-      }
-
-      function myclick(i) {
-        google.maps.event.trigger(gmarkers[i], "click");
       }
 
       function loadlist(selobj, url, nameattr, valueattr) {
         $(selobj).empty();
-        $.getJSON(url, {}, function(data)
-        {
+        $.getJSON(url, {}, function(data) {
           $(selobj).append($('<option></option>').val('').html('--Please Select--'));
-          $.each(data, function(i, obj)
-          {
-
+          $.each(data, function(i, obj) {
             $(selobj).append($('<option></option>').val(obj[valueattr]).html(obj[valueattr] + " " + obj[nameattr]));
           });
         });
@@ -256,7 +252,7 @@
         else
           $('select#ac').empty();
       }
-
+      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     <style>
       .popup{};

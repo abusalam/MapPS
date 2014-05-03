@@ -163,7 +163,6 @@ header('Access-Control-Allow-Origin: *');
           var critical_ps_mark = (critical_ps == "Yes") ? '<img class="pad" alt="Critical" src="images/critical.png" width="24px">' : '';
           var vulnerable_mark = (vulnerable_ps == "Yes") ? '<img class="pad" alt="Vulnerable" src="images/vulnerable.png" width="24px">' : '';
           var mobile_shadow_zone_mark = (mobile_shadow_zone == "Yes") ? '<img class="pad" alt="mobile_shadow_zone" src="images/mobile_shadow.png" width="24px">' : '';
-          var mobile_shadow_zone = node['mobile_shadow_zone'];
           var point = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
           var marker = new google.maps.Marker({
             position: point,
@@ -336,26 +335,31 @@ header('Access-Control-Allow-Origin: *');
             <input type="text" class="input-mini" name="ps_no" id="ps_no"  />
             <p>
               <input type="radio" name="op_criteria" id="op_criteria" value="Vulnerable"  />
-              <img src="images/vulnerable.png" width="20px" align="" />Vulnerable<br />
+              <img src="images/vulnerable.png" width="32px" align="" />Vulnerable<br />
             </p>
             <p>
               <input type="radio" name="op_criteria" id="op_criteria" value="Critical" />
-              <img src="images/critical.png"  width="20px" />Critical<br />
+              <img src="images/critical.png"  width="32px" />Critical<br />
             </p>
             <p>
               <input type="radio" name="op_criteria" id="op_criteria" value="LWE" />
-              <img src="images/lwe.png"  width="20px" />LWE<br /></p>
+              <img src="images/lwe.png"  width="32px" />LWE<br /></p>
             <p>
               <input type="radio" name="op_criteria" id="op_criteria" value="MSZ" />
-              <img src="images/mobile_shadow.png"  width="20px" />Mobile Shadow Zone<br />
+              <img src="images/mobile_shadow.png"  width="32px" />Mobile Shadow Zone<br />
             </p>
             <p>
               <input type="radio" name="op_criteria" id="op_criteria" value="" />None<br />
             </p>
           </li>
-          <li><input type="button" name="btn" name="btn" class="btn" value="SHOW DETAILS" onclick="getData();"/></li>
-          <li><a href="poll_monitoring.php" title="Poll Monitoring"> Poll Monitoring</a></li>
-          <label for="MobileIP">Mobile IP: </label><input type="text" style="width: 105px;" value="10.173.168.133" id="MobileIP" />
+          <li>
+            <input type="button" name="btn" name="btn" class="btn" value="SHOW DETAILS" onclick="getData();"/>
+          </li>
+          <label for="MobileIP">Mobile IP: </label>
+          <input type="text" style="width: 105px;" value="10.173.168.133" id="MobileIP" />
+          <li>
+            <a href="poll_monitoring.php" title="Poll Monitoring"> Poll Monitoring</a>
+          </li>
         </ul>
       </nav>
       <div class="page_head" id="pHead">
@@ -378,20 +382,20 @@ header('Access-Control-Allow-Origin: *');
       </div>
       <script src="js/classie.js"></script>
       <script>
-            var menuLeft = document.getElementById('cbp-spmenu-s1')
-            showLeft = document.getElementById('showLeft'),
-                    body = document.body;
+              var menuLeft = document.getElementById('cbp-spmenu-s1')
+              showLeft = document.getElementById('showLeft'),
+                      body = document.body;
 
-            showLeft.onclick = function() {
-              classie.toggle(this, 'active');
-              classie.toggle(menuLeft, 'cbp-spmenu-open');
+              showLeft.onclick = function() {
+                classie.toggle(this, 'active');
+                classie.toggle(menuLeft, 'cbp-spmenu-open');
 
-            };
+              };
 
-            var sHeight = screen.height;
-            var head_height = $('#pHead').height();
-            $('#gmap_canvas').height($(document).height() - head_height);
-            show_hide();
+              var sHeight = screen.height;
+              var head_height = $('#pHead').height();
+              $('#gmap_canvas').height($(document).height() - head_height);
+              show_hide();
       </script>
       <div style="position:fixed;background:#fff;opacity:.7;bottom:0px;left:0px;color:#000">
         <span>[<img src="images/237.png">223, 227, 232, 236, 237]</span>
