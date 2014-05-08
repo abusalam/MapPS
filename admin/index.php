@@ -66,7 +66,7 @@ if(!isset($_SESSION['admin_name']))
 <ul id="nav">
 	<li class="first"><a title="Ac List"  href="index.php?pgid=<?php echo base64_encode('ac_list');?>"><span> AC LIST </span></a>
 	<li><a title="PS Details" class="parent" href="index.php?pgid=<?php echo base64_encode('ps_list');?>"><span> PS DETAILS </span></a>
-	<li><a title="PS Details" class="parent" href="index.php?pgid=<?php echo base64_encode('ps_list');?>"><span> POLL MONITORING </span></a>
+	<li><a title="PS Details" class="parent" href="index.php?pgid=<?php echo base64_encode('poll_monitor');?>"><span> POLL MONITORING </span></a>
 </ul>
 	
 </div>

@@ -1,3 +1,9 @@
+<?php
+if (!isset($_SESSION)) {
+  session_start();
+}
+header('Access-Control-Allow-Origin: *');
+?>
 <!DOCTYPE html>
 <html lang="en" >
   <head>
@@ -11,7 +17,7 @@
     <link rel="stylesheet" href="css/component.css">
     <script src="js/jquery-1.7.2.min.js"></script>
     <script src="js/modernizr.custom.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAJw9v_Qe8VDp2C4CoU0YIdfqqOLl4TClc&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
     <link rel="stylesheet" href="css/lightbox.css" media="screen"/>
     <script src="js/lightbox-2.6.min.js"></script>
     <script>
@@ -163,25 +169,28 @@
             tag: ps_id,
             position: point,
             map: map,
-            title: (ps_no + '\n' + ps_name),
+            title: (ac_no + ':' + ps_no + '\n' + ps_name),
             html: '<div style="height:300px"> <table><tbody><tr><td colspan="2">'
-                    + ps_no + '-' + ps_name + '</td></tr><tr><td> BDO OFFICE:</td><td>'
+                    + '<b>AC:' + ac_no + ' - PS:' + ps_no + ' ' + ps_name + '</b></td></tr><tr><td> BDO OFFICE:</td><td>'
                     + bdo_office + '</td></tr><tr><td> BDO NO:</td><td><a class="PhoneNo">'
                     + bdo_no + '</a></td></tr><tr><td>  SECTOR :</td><td>' + sector_no + '-' + sector_name
                     + '</td></tr><tr><td>SECTOR OFFICER :</td><td>' + sector_officer_name
-                    + '</td></tr><tr><td>MOBILE NO :</td><td><a href="tel:' + sector_officer_mobile + '">' + sector_officer_mobile
+                    + '</td></tr><tr><td>MOBILE NO :</td><td><a class="PhoneNo">' + sector_officer_mobile
                     + '</a></td></tr><tr><td> VST:</td><td>' + vst_name
                     + ' <a href="tel:' + vst_mobile + '">' + vst_mobile
                     + '</a></td></tr><tr><td> SST:</td><td>' + sst_name
                     + ' <a href="tel:' + sst_mobile + '">' + sst_mobile
                     + '</a></td></tr><tr><td> FS:</td><td>' + fs_name
                     + ' <a href="tel:' + fs_mobile + '">' + fs_mobile
-                    + '</a></td></tr><tr><td>PRO :</td><td><a href="tel:' + pro_mobile_no + '">' + pro_mobile_no + '</a></td></tr><tr><td>P1:</td><td><a href="tel:' + p1_mobile_no + '">' + p1_mobile_no + '</a></td></tr><tr><td></td></tr><tr><td colspan="2"><span>' + lweMark
+                    + '</a></td></tr><tr><td>PRO :</td><td><a class="PhoneNo">' + pro_mobile_no
+                    + '</a></td></tr><tr><td>P1:</td><td><a class="PhoneNo">' + p1_mobile_no
+                    + '</a></td></tr><tr><td></td></tr><tr><td colspan="2"><span>' + lweMark
                     + '</span><span>' + mobile_shadow_zone_mark
                     + '</span><span>' + critical_ps_mark
                     + '</span><span>' + vulnerable_mark + '</span></td></tr>'
                     + '<tr><td colspan="4"><a data-lightbox="example-set" href="ps_photo/' + ac_no + '_' + ps_no + '.jpg"><img width="50px" height="50px" src="ps_photo/' + ac_no + '_' + ps_no + '_T.jpg"></a><tr><td></tbody></table></div>',
-            icon: customIcons[status_icon]
+            icon: 'Marker.php?ColorAC=FF9900&ColorPS=000000&PSNo=' + ps_no
+                    //customIcons[status_icon]
 
           });
 
@@ -222,11 +231,18 @@
         }
       }
 
+      function myclick(i) {
+        google.maps.event.trigger(gmarkers[i], "click");
+      }
+
       function loadlist(selobj, url, nameattr, valueattr) {
         $(selobj).empty();
-        $.getJSON(url, {}, function(data) {
+        $.getJSON(url, {}, function(data)
+        {
           $(selobj).append($('<option></option>').val('').html('--Please Select--'));
-          $.each(data, function(i, obj) {
+          $.each(data, function(i, obj)
+          {
+
             $(selobj).append($('<option></option>').val(obj[valueattr]).html(obj[valueattr] + " " + obj[nameattr]));
           });
         });

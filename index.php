@@ -173,14 +173,16 @@ header('Access-Control-Allow-Origin: *');
                     + bdo_office + '</td></tr><tr><td> BDO NO:</td><td><a class="PhoneNo">'
                     + bdo_no + '</a></td></tr><tr><td>  SECTOR :</td><td>' + sector_no + '-' + sector_name
                     + '</td></tr><tr><td>SECTOR OFFICER :</td><td>' + sector_officer_name
-                    + '</td></tr><tr><td>MOBILE NO :</td><td><a href="tel:' + sector_officer_mobile + '">' + sector_officer_mobile
+                    + '</td></tr><tr><td>MOBILE NO :</td><td><a class="PhoneNo">' + sector_officer_mobile
                     + '</a></td></tr><tr><td> VST:</td><td>' + vst_name
                     + ' <a href="tel:' + vst_mobile + '">' + vst_mobile
                     + '</a></td></tr><tr><td> SST:</td><td>' + sst_name
                     + ' <a href="tel:' + sst_mobile + '">' + sst_mobile
                     + '</a></td></tr><tr><td> FS:</td><td>' + fs_name
                     + ' <a href="tel:' + fs_mobile + '">' + fs_mobile
-                    + '</a></td></tr><tr><td>PRO :</td><td><a href="tel:' + pro_mobile_no + '">' + pro_mobile_no + '</a></td></tr><tr><td>P1:</td><td><a href="tel:' + p1_mobile_no + '">' + p1_mobile_no + '</a></td></tr><tr><td></td></tr><tr><td colspan="2"><span>' + lweMark
+                    + '</a></td></tr><tr><td>PRO :</td><td><a class="PhoneNo">' + pro_mobile_no 
+		    + '</a></td></tr><tr><td>P1:</td><td><a class="PhoneNo">' + p1_mobile_no 
+		    + '</a></td></tr><tr><td></td></tr><tr><td colspan="2"><span>' + lweMark
                     + '</span><span>' + mobile_shadow_zone_mark
                     + '</span><span>' + critical_ps_mark
                     + '</span><span>' + vulnerable_mark + '</span></td></tr>'
