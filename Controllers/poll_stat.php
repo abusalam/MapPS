@@ -2,6 +2,8 @@
 
 include_once('../mysql_conn.php');
 include_once('../functions/common.php');
+$psn = isset($_GET['psn']) ? $_GET['psn'] : "";
+$psn = is_numeric($psn) ? 'and ps_details.ps_no='.$psn : "";
 $pc = isset($_GET['pc']) ? $_GET['pc'] : "";
 $pc = is_numeric($pc) ? $pc : "";
 $ac = isset($_GET['ac']) ? $_GET['ac'] : "";
@@ -24,7 +26,7 @@ if ($_GET['stype'] == "avg") {
 }
 if ($_GET['stype'] == "ps") {
   $sql = "select ps_id,ps_no,ac.ac_no,lat,lon,ps_name,sector_officer_name,sector_name,sector_officer_mobile,sector_no,ps_details.bdo_office,ps_details.bdo_no,pro_mobile_no,p1_mobile_no,
-vulnerable_ps,critical_ps,lwe,mobile_shadow_zone,vst_name, vst_mobile, sst_name, sst_mobile, fs_name, fs_mobile,poll_stat from  ps_details,ac  where ps_details.ac_no=ac.ac_no ";
+vulnerable_ps,critical_ps,lwe,mobile_shadow_zone,vst_name, vst_mobile, sst_name, sst_mobile, fs_name, fs_mobile,poll_stat from  ps_details,ac  where ps_details.ac_no=ac.ac_no $psn";
   if ($pc != "")
     $sql .=" and pc_no=" . makeSafe($pc);
   if ($ac != "")
