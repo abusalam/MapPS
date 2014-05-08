@@ -33,9 +33,11 @@ header('Access-Control-Allow-Origin: *');
       function getData() {
         $('#showLeft').click();
         $('#loading').show();
+        var psn = $("#psn").val();
         $.ajax({
-          url: "Controllers/poll_stat.php?stype=ps&pc=" + $('select#pc').val() + "&ac=" + $('select#ac').val() + "&sector_no=&op_criteria=&ps_no=",
+          url: "Controllers/poll_stat.php?stype=ps&psn=" + $('#psn').val() + "&pc=" + $('select#pc').val() + "&ac=" + $('select#ac').val(),
           type: "GET",
+          data: "psn=" + psn,
           async: false,
           dataType: "json",
           _accept: "application/json",
@@ -111,6 +113,14 @@ header('Access-Control-Allow-Origin: *');
         //if(map_type=="HYBRID") map.setMapTypeId(google.maps.MapTypeId.HYBRID);
         //if(map_type=="SATELLITE") map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
         //if(map_type=="TERRAIN") map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+        
+        var a = [];
+        a["226"] ='FF0000';
+        a["227"] ='FF00FF';
+        a["229"] ='00FFFF';
+        a["230"] ='FF9933';
+        a["231"] ='33FF00';
+        a["235"] ='9999FF';  
 
         infowindow = new google.maps.InfoWindow({content: "holding..."});
         for (i = 0; i < markers.length; i++) {
@@ -189,7 +199,7 @@ header('Access-Control-Allow-Origin: *');
                     + '</span><span>' + critical_ps_mark
                     + '</span><span>' + vulnerable_mark + '</span></td></tr>'
                     + '<tr><td colspan="4"><a data-lightbox="example-set" href="ps_photo/' + ac_no + '_' + ps_no + '.jpg"><img width="50px" height="50px" src="ps_photo/' + ac_no + '_' + ps_no + '_T.jpg"></a><tr><td></tbody></table></div>',
-            icon: 'Marker.php?ColorAC=FF9900&ColorPS=000000&PSNo=' + ps_no
+            icon: 'Marker.php?PSNo=' + ps_no + '&ColorPS=000000&ColorAC=' + a[ac_no]
                     //customIcons[status_icon]
 
           });
@@ -302,6 +312,7 @@ header('Access-Control-Allow-Origin: *');
               <select name="ac" id="ac" style="width:180px">
                 <option value="" >All</option>
               </select>
+              PS:<input type="text" name="psn" id="psn" style="width:40px"/>
               <input type="button" name="btn" name="btn" class="btn" value="SHOW STATUS" onclick="getData();"/>
             </td>
           </tr>
@@ -314,6 +325,12 @@ header('Access-Control-Allow-Origin: *');
         <span>[<img src="images/init.png">Poll Not Started]</span>
         <span>[<img src="images/PS.png">Poll Started]</span>
         <span>[<img src="images/PE.png">Poll Closed]</span>
+        <span style="background:#FF0000;">226-Sabong</span>
+        <span style="background:#FF00FF;">227-Pingla</span>
+        <span style="background:#00FFFF">229-Debra</span>
+        <span style="background:#FF9933">230-Daspur</span>
+        <span style="background:#33FF00;">231-Ghatal(SC)</span>
+        <span style="background:#9999FF;">235-Keshpur(SC)</span>
         <span>[<img src="images/Maps-icon.png"><a href="Android/GoogleMapsV2.apk">PS Maps Android App]</a></span>
         <span>[<img src="images/phone-icon.png"><a href="Android/CallBridge.apk">Phone Calling Android App]</a></span>
       </div>
